@@ -35,6 +35,17 @@ router.get('/edit/:id', (req,res)=>{
     })
 })
 
+//aca lanzamos nuestro query para DELETE/BORRAR
+router.get('/delete/:id', (req, res) => {
+    const id = req.params.id;
+    conexion.query('DELETE FROM users WHERE id = ?',[id], (error, results)=>{
+        if(error){
+            console.log(error);
+        }else{           
+            res.redirect('/');         
+        }
+    })
+});
 
 const crud = require('./controllers/crud')
 router.post('/save', crud.save);
